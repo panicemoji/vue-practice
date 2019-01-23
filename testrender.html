@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            {{ message }}
+            <br><br>
+            {{ whatIsVue }}
+            <br><br>
+            {{ rendered }}
+            <br><br>
+            <span v-bind:title="loadDate">{{ hover }}</span>
+            <br><br>
+            {{ currentTime }}
+        </div>
+
+        <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message : 'this is vue wow!',
+                whatIsVue : 'vue is a progressive javascript framework for building UIs - its focused on being view only, and is capable of powering professional single page applications with modern tools / supporting libraries!',
+                rendered : 'this text has been declaritively rendered into the DOM ',
+                hover : 'if you hover this text, you can see when you loaded this page! this has been created with a directive ; a special attribute provided by vue that applies reactive behaviour to the rendered DOM',
+                loadDate : new Date().toLocaleString(),
+                currentTime : new Date().toLocaleTimeString()
+            },
+            methods: {
+                updateTime: function(){
+                    currentTime = new Date().toLocaleTimeString();
+                }
+            }
+        });
+
+        </script>
+    </body>
+</html>
