@@ -2,6 +2,10 @@
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Muli');
+        body{margin-left:10px;margin-top:10px;font-family:Muli;}
+        </style>
     </head>
 
     <body>
@@ -15,9 +19,29 @@
             <span v-bind:title="loadDate">{{ hover }}</span>
             <br><br>
             {{ currentTime }}
+            <br><br>
+            <span v-if="seen">while the app's 'seen' attribute is true, you can see this!</span><br>
+            <button v-on:click="toggleVisibility">toggle 'seen'</button>
+            <br><br>
+            <ul>
+            	<li v-for="item in list">
+            	{{ item }}
+                </li>
+            </ul>
+            <br><br>
+            <span> {{ input }} </span><br>
+            <input v-model="input">
+            <br><br>
+            <examplecomponent msg="this is a component created with vue!"></examplecomponent>
         </div>
 
         <script>
+
+        Vue.component('examplecomponent',{
+            props: ['msg'],
+            template: '<span> {{ msg }} </span>'
+        })
+
         var app = new Vue({
             el: "#app",
             data: {
@@ -26,14 +50,19 @@
                 rendered : 'this text has been declaritively rendered into the DOM ',
                 hover : 'if you hover this text, you can see when you loaded this page! this has been created with a directive ; a special attribute provided by vue that applies reactive behaviour to the rendered DOM',
                 loadDate : new Date().toLocaleString(),
-                currentTime : new Date().toLocaleTimeString()
+                currentTime : new Date().toLocaleTimeString(),
+                seen : true,
+                list : ["this list", "has been rendered", "with vue!"],
+                input : "whatever you type below will be displayed here!"
             },
             methods: {
-                updateTime: function(){
-                    currentTime = new Date().toLocaleTimeString();
-                }
-            }
+            	toggleVisibility: function(){
+                	this.seen = !this.seen}
+                    }
+            
         });
+        
+        
 
         </script>
     </body>
